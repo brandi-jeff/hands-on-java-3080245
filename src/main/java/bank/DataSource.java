@@ -46,25 +46,24 @@ public class DataSource {
   }
 
   public static Account getAccount(int accountId){
-    String sql = "select * from account where id = ?";
+    String sql = "select * from account where id =?";
     Account account = null;
     try(Connection connection = connect();
-        PreparedStatement statement = connection.prepareStatement(sql)) {
-          statement.setInt(1, accountId);
-      
-          try(ResultSet resultSet = statement.executeQuery()){
-            account = new Account(
-              resultSet.getInt("id"),
-              resultSet.getString("type"),
-              resultSet.getInt("balance"));
-          }
-        }catch(SQLException e){
-          e.printStackTrace();
+      PreparedStatement statement = connection.prepareStatement(sql)){
+        statement.setInt(1, accountId);
+
+        try(ResultSet resultSet = statement.executeQuery()){
+          account = new Account(
+           resultSet.getInt("id"), 
+           resultSet.getString("type"), 
+           resultSet.getInt("balance"));
         }
+      }catch(SQLException e){
+        e.printStackTrace();
+      }
 
-        return account; 
+      return account;
   }
-
 
   public static void main(String[] args){
     Customer customer = getCustomer("twest8o@friendfeed.com");
