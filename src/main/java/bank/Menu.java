@@ -76,18 +76,24 @@ public class Menu {
           break;
 
           case 2:
-          System.out.println("How much would you like to withdraw?");
-          amount = scanner.nextDouble();
-          account.withdraw(amount);
-          break;
+            System.out.println("How much would you like to withdraw?");
+            amount = scanner.nextDouble();
+            
+            try{
+              account.withdraw(amount);
+            }catch(AmountException e){
+              System.out.println(e.getMessage());
+              System.out.println("Please try again.");
+            }
+            break;
 
           case 3:
-          System.out.println("Current balance: " + account.getBalance());
-          break;
+            System.out.println("Current balance: " + account.getBalance());
+            break;
 
           case 4:
           Authenticator.logout(customer);
-          System.out.println("Thanks for banking at GLobe Bank International!");
+          System.out.println("Thanks for banking at Globe Bank International!");
           break;
 
           default:
